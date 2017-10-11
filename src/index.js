@@ -103,6 +103,18 @@ class Game extends React.Component {
 		}, 100);
 	}
 
+	handleClickRestart(){
+		this.setState({
+			history: [
+				{
+					squares: Array(9).fill(null)
+				}
+			],
+			currentStep: null, //等于null表示没有在查看历史记录
+			xIsNext: true
+		});
+	}
+
 	render() {
 		const history = this.state.history;
 		const currentStep = this.state.currentStep;
@@ -110,7 +122,7 @@ class Game extends React.Component {
 			currentStep !== null
 				? history[currentStep]
 				: history[history.length - 1];
-		const winner = calculateWinner(history[history.length-1].squares);
+		const winner = calculateWinner(history[history.length - 1].squares);
 
 		let status;
 		if (winner) {
@@ -119,8 +131,11 @@ class Game extends React.Component {
 			status = "Next player: " + (this.state.xIsNext ? "X" : "O");
 		}
 
+		let restartButton = history.length > 1 ? (<a className="restart" onClick={()=>this.handleClickRestart()}>Restart</a>) : ("");
+
 		return (
 			<div className="game">
+				{restartButton}
 				<div className="game-board">
 					<Board
 						squares={current.squares}
@@ -129,20 +144,10 @@ class Game extends React.Component {
 				</div>
 				<div className="game-info">
 					<div className="status">{status}</div>
-					<div>
-						<a
-							className="navigator"
-							onClick={() => this.handleStepOffset(-1)}
-						>
-							prev
-						</a>
-						<a
-							className="navigator"
-							onClick={() => this.handleStepOffset(1)}
-						>
-							next
-						</a>
-					</div>
+				</div>
+				<div className="navigators">
+					<a onClick={() => this.handleStepOffset(-1)}>Prev Step</a>
+					<a onClick={() => this.handleStepOffset(1)}>Next Step</a>
 				</div>
 			</div>
 		);
