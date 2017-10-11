@@ -18,30 +18,26 @@ class Board extends React.Component {
 			<Square
 				value={this.props.squares[i]}
 				onClick={() => this.props.onClick(i)}
+				key={i}
 			/>
 		);
 	}
 
 	render() {
-		return (
-			<div>
-				<div className="board-row">
-					{this.renderSquare(0)}
-					{this.renderSquare(1)}
-					{this.renderSquare(2)}
+		console.log(this.props.squares);
+		let rows = [];
+		for (let i = 0; i < 3; i++) {
+			let cols = [];
+			for (let j = 0; j < 3; j++) {
+				cols.push(this.renderSquare(i * 3 + j));
+			}
+			rows.push(
+				<div className="board-row" key={i}>
+					{cols}
 				</div>
-				<div className="board-row">
-					{this.renderSquare(3)}
-					{this.renderSquare(4)}
-					{this.renderSquare(5)}
-				</div>
-				<div className="board-row">
-					{this.renderSquare(6)}
-					{this.renderSquare(7)}
-					{this.renderSquare(8)}
-				</div>
-			</div>
-		);
+			);
+		}
+		return <div>{rows}</div>;
 	}
 }
 
@@ -67,12 +63,12 @@ class Game extends React.Component {
 		const currentStep = this.state.currentStep;
 
 		//点击时在查看历史记录
-		if(currentStep !== null){
+		if (currentStep !== null) {
 			this.setState({
 				history: history.slice(),
 				currentStep: null
-			});	
-		}else{
+			});
+		} else {
 			//点击时不在查看历史记录
 			if (calculateWinner(squares) || squares[i]) {
 				console.log("return");
@@ -102,7 +98,7 @@ class Game extends React.Component {
 		this.setState({
 			currentStep: offsetStep
 		});
-		setTimeout(function(){
+		setTimeout(function() {
 			console.log(that.state);
 		}, 100);
 	}
@@ -110,10 +106,11 @@ class Game extends React.Component {
 	render() {
 		const history = this.state.history;
 		const currentStep = this.state.currentStep;
-		const current = currentStep !== null
-			? history[currentStep]
-			: history[history.length - 1];
-		const winner = calculateWinner(current.squares);
+		const current =
+			currentStep !== null
+				? history[currentStep]
+				: history[history.length - 1];
+		const winner = calculateWinner(history[history.length-1].squares);
 
 		let status;
 		if (winner) {
