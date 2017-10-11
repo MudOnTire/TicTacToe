@@ -1,0 +1,40 @@
+div{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.board-row{
+	height: 39px;
+}
+
+.square{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	margin: -1px -1px 0 0;
+	padding: 0;
+	border: 1px solid #ccc;
+	display: inline-block;
+	vertical-align: middle;;
+	text-align: center;;
+}
+
+.status{
+	width: 117px;
+	text-align: center;;
+	line-height: 40px;
+}
+
+.navigator{
+	padding: 2px 10px;
+	margin: 4px;
+	text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	color: #888;
+}
+
+.navigator:hover{
+	cursor: pointer;;
+}
