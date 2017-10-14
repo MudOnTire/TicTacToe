@@ -103,7 +103,7 @@ class Game extends React.Component {
 		}, 100);
 	}
 
-	handleClickRestart(){
+	handleClickRestart() {
 		this.setState({
 			history: [
 				{
@@ -131,7 +131,17 @@ class Game extends React.Component {
 			status = "Next player: " + (this.state.xIsNext ? "X" : "O");
 		}
 
-		let restartButton = history.length > 1 ? (<a className="restart" onClick={()=>this.handleClickRestart()}>Restart</a>) : ("");
+		let restartButton =
+			history.length > 1 ? (
+				<a
+					className="restart"
+					onClick={() => this.handleClickRestart()}
+				>
+					Restart
+				</a>
+			) : (
+				""
+			);
 
 		return (
 			<div className="game">
