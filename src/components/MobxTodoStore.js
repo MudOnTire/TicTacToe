@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {observable} from 'mobx';
 import { observer } from 'mobx-react';
 
 class Todo {
@@ -10,7 +11,7 @@ class Todo {
     }
 }
 
-// @observer
+@observer
 class TodoView extends Component {
     render() {
         const todo = this.props.todo;
@@ -19,7 +20,16 @@ class TodoView extends Component {
                 <input
                     type="checkbox"
                     checked={todo.finished}
-                    onClick={() => todo.finished = !todo.finished}
+                    onChange={() => {
+                        
+                    }}
+                    onClick={
+                        () => {
+                            todo.finished = !todo.finished;
+                            console.log(todo.finished);
+                            // this.setState({});
+                        }
+                    }
                 />
                 {todo.title}
             </li>
@@ -27,14 +37,8 @@ class TodoView extends Component {
     }
 }
 
-// @observer
+@observer
 class TodoList extends Component {
-
-    testFunction = () => {
-        const testProp = "testProp";
-        console.log("i'm a test function");
-    }
-
     render() {
         return (
             <div>
