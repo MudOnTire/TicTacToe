@@ -1,3 +1,3 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { } from './components/ComputedDemo';
+import { } from './components/ObserverDemo';

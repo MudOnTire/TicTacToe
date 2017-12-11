@@ -14,7 +14,6 @@ class OrderLine {
     }
 
     @computed get total() {
-        console.log("total get calculated");
         return this.price * this.amount;
     }
 }
@@ -22,13 +21,13 @@ class OrderLine {
 @observer
 class OrderLineView extends Component {
 
-    reduceAmount = () => {
+    minusOne = () => {
         if (this.props.orderline.amount > 0) {
             this.props.orderline.amount--;
         }
     }
 
-    addAmount = () => {
+    plusOne = () => {
         this.props.orderline.amount++;
     }
 
@@ -49,8 +48,8 @@ class OrderLineView extends Component {
                     <span>{orderline.total}</span>
                 </p>
                 <div>
-                    <button onClick={() => { this.reduceAmount() }}>-</button>
-                    <button onClick={() => { this.addAmount() }}>+</button>
+                    <button onClick={() => { this.minusOne() }}>-</button>
+                    <button onClick={() => { this.plusOne() }}>+</button>
                 </div>
             </div>
         )
